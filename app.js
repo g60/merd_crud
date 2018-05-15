@@ -7,6 +7,13 @@ var bodyParser = require('body-parser');
 var book = require('./routes/book');
 var app = express();
 
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://heroku_ffm45p9c:ph30blcjb9h1hek1j9ke74o51m@ds219100.mlab.com:19100/heroku_ffm45p9c',
+     { promiseLibrary: require('bluebird') })
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
